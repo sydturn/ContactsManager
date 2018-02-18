@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MijemTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MijemTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contacts">
           <Key>
             <PropertyRef Name="ContactID" />
@@ -14,6 +14,7 @@
           <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
           <Property Name="BirthDate" Type="date" Nullable="false" />
           <Property Name="ContactType" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="8000" />
         </EntityType>
         <EntityType Name="ContactTypes">
           <Key>
@@ -21,7 +22,6 @@
           </Key>
           <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="TypeDescription" Type="varchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK_Contacts_ContactTypes">
           <End Role="ContactTypes" Type="Self.ContactTypes" Multiplicity="1" />
@@ -35,6 +35,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CreateContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Birthday" Type="date" Mode="In" />
+          <Parameter Name="TypeId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteContactById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTypeById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllContacts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllTypesView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetContactById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTypeById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateContactInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Birthday" Type="date" Mode="In" />
+          <Parameter Name="TypeId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateContactType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MijemTestModelStoreContainer">
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactTypes" EntityType="Self.ContactTypes" Schema="dbo" store:Type="Tables" />
@@ -43,7 +78,8 @@
             <End Role="Contacts" EntitySet="Contacts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MijemTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -56,7 +92,8 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ContactType" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ContactType1" Relationship="MijemTestModel.FK_Contacts_ContactTypes" FromRole="Contact" ToRole="ContactType" />
+          <Property Name="Description" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ContactType1" Relationship="Self.FK_Contacts_ContactTypes" FromRole="Contacts" ToRole="ContactTypes" />
         </EntityType>
         <EntityType Name="ContactType">
           <Key>
@@ -64,29 +101,87 @@
           </Key>
           <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TypeDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Contacts" Relationship="MijemTestModel.FK_Contacts_ContactTypes" FromRole="ContactType" ToRole="Contact" />
+          <NavigationProperty Name="Contacts" Relationship="Self.FK_Contacts_ContactTypes" FromRole="ContactTypes" ToRole="Contacts" />
         </EntityType>
-        <EntityContainer Name="MijemTestEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Contacts" EntityType="Self.Contact" />
-          <EntitySet Name="ContactTypes" EntityType="Self.ContactType" />
-          <AssociationSet Name="FK_Contacts_ContactTypes" Association="MijemTestModel.FK_Contacts_ContactTypes">
-            <End Role="ContactType" EntitySet="ContactTypes" />
-            <End Role="Contact" EntitySet="Contacts" />
-          </AssociationSet>
-        </EntityContainer>
         <Association Name="FK_Contacts_ContactTypes">
-          <End Type="MijemTestModel.ContactType" Role="ContactType" Multiplicity="1" />
-          <End Type="MijemTestModel.Contact" Role="Contact" Multiplicity="*" />
+          <End Role="ContactTypes" Type="Self.ContactType" Multiplicity="1" />
+          <End Role="Contacts" Type="Self.Contact" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ContactType">
+            <Principal Role="ContactTypes">
               <PropertyRef Name="TypeID" />
             </Principal>
-            <Dependent Role="Contact">
+            <Dependent Role="Contacts">
               <PropertyRef Name="ContactType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="MijemTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="ContactTypes" EntityType="Self.ContactType" />
+          <AssociationSet Name="FK_Contacts_ContactTypes" Association="Self.FK_Contacts_ContactTypes">
+            <End Role="ContactTypes" EntitySet="ContactTypes" />
+            <End Role="Contacts" EntitySet="Contacts" />
+          </AssociationSet>
+          <FunctionImport Name="CreateContact">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Birthday" Mode="In" Type="DateTime" />
+            <Parameter Name="TypeId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteContactById">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTypeById">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllContacts" ReturnType="Collection(MijemTestModel.GetAllContacts_Result)" />
+          <FunctionImport Name="GetAllTypes" ReturnType="Collection(MijemTestModel.GetAllTypes_Result)" />
+          <FunctionImport Name="GetAllTypesView" />
+          <FunctionImport Name="GetContactById" ReturnType="Collection(MijemTestModel.GetContactById_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTypeById" ReturnType="Collection(MijemTestModel.GetTypeById_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateContactInfo">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Birthday" Mode="In" Type="DateTime" />
+            <Parameter Name="TypeId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateContactType">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllContacts_Result">
+          <Property Type="Int32" Name="ContactID" Nullable="false" />
+          <Property Type="String" Name="ContactName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="false" />
+          <Property Type="Int32" Name="ContactType" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="8000" />
+        </ComplexType>
+        <ComplexType Name="GetAllTypes_Result">
+          <Property Type="Int32" Name="TypeID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetContactById_Result">
+          <Property Type="Int32" Name="ContactID" Nullable="false" />
+          <Property Type="String" Name="ContactName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="false" />
+          <Property Type="Int32" Name="ContactType" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="8000" />
+        </ComplexType>
+        <ComplexType Name="GetTypeById_Result">
+          <Property Type="Int32" Name="TypeID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -101,6 +196,7 @@
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -109,10 +205,55 @@
               <MappingFragment StoreEntitySet="ContactTypes">
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateContact" FunctionName="MijemTestModel.Store.CreateContact" />
+          <FunctionImportMapping FunctionImportName="DeleteContactById" FunctionName="MijemTestModel.Store.DeleteContactById" />
+          <FunctionImportMapping FunctionImportName="DeleteTypeById" FunctionName="MijemTestModel.Store.DeleteTypeById" />
+          <FunctionImportMapping FunctionImportName="GetAllContacts" FunctionName="MijemTestModel.Store.GetAllContacts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MijemTestModel.GetAllContacts_Result">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTypes" FunctionName="MijemTestModel.Store.GetAllTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MijemTestModel.GetAllTypes_Result">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTypesView" FunctionName="MijemTestModel.Store.GetAllTypesView" />
+          <FunctionImportMapping FunctionImportName="GetContactById" FunctionName="MijemTestModel.Store.GetContactById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MijemTestModel.GetContactById_Result">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTypeById" FunctionName="MijemTestModel.Store.GetTypeById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MijemTestModel.GetTypeById_Result">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateContactInfo" FunctionName="MijemTestModel.Store.UpdateContactInfo" />
+          <FunctionImportMapping FunctionImportName="UpdateContactType" FunctionName="MijemTestModel.Store.UpdateContactType" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -82,7 +82,7 @@ namespace MijemApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contactType).State = EntityState.Modified;
+                db.Entry(contactType).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

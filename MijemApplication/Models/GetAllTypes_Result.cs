@@ -10,17 +10,10 @@
 namespace MijemApplication.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Contact
+    public partial class GetAllTypes_Result
     {
-        public int ContactID { get; set; }
-        public string ContactName { get; set; }
-        public string PhoneNumber { get; set; }
-        public System.DateTime BirthDate { get; set; }
-        public int ContactType { get; set; }
-        public string Description { get; set; }
-    
-        public virtual ContactType ContactType1 { get; set; }
+        public int TypeID { get; set; }
+        public string TypeName { get; set; }
     }
 }

@@ -40,7 +40,7 @@
                         @Html.DisplayFor(modelItem => item.TypeName)
                     </td>
                     <td>
-                        <input type="button" title="Delete" value="D" onclick="location.href='@Url.Action("Edit", "Contacts", item)'" />
+                        @Html.ActionLink("EDIT", "Edit", new { vm = item }, new { @class = "btn btn-normal" })
                         @Html.ActionLink("DELETE", "Delete", new { id = item.ContactId }, new { @class = "btn btn-normal" })
                     </td>
                 </tr>

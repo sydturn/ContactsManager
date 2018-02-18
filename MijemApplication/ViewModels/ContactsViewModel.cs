@@ -21,12 +21,18 @@ namespace MijemApplication.ViewModels
         [Display(Name = "Birth Date")]
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime BirthDate { get; set; }
+        
+        public string Description { get; set; }
 
-        [Display(Name = "Contact Type")]
-        public string TypeDescription { get; set; }
         public string TypeName { get; set; }
-        public int ContactTypeId { get; set; }
+
+        public int ContactType { get; set; } //type Id
 
         public IEnumerable<SelectListItem> Types { get; set; }
+    }
+    public class TypeViewModel
+    {
+        public int TypeID { get; set; }
+        public string TypeName { get; set; }
     }
 }

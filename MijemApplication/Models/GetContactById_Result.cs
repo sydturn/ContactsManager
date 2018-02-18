@@ -10,9 +10,8 @@
 namespace MijemApplication.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Contact
+    public partial class GetContactById_Result
     {
         public int ContactID { get; set; }
         public string ContactName { get; set; }
@@ -20,7 +19,5 @@ namespace MijemApplication.Models
         public System.DateTime BirthDate { get; set; }
         public int ContactType { get; set; }
         public string Description { get; set; }
-    
-        public virtual ContactType ContactType1 { get; set; }
     }
 }

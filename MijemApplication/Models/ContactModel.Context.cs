@@ -12,6 +12,8 @@ namespace MijemApplication.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MijemTestEntities : DbContext
     {
@@ -27,5 +29,127 @@ namespace MijemApplication.Models
     
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<ContactType> ContactTypes { get; set; }
+    
+        public virtual int CreateContact(Nullable<int> id, string name, string phone, Nullable<System.DateTime> birthday, Nullable<int> typeId, string description)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var birthdayParameter = birthday.HasValue ?
+                new ObjectParameter("Birthday", birthday) :
+                new ObjectParameter("Birthday", typeof(System.DateTime));
+    
+            var typeIdParameter = typeId.HasValue ?
+                new ObjectParameter("TypeId", typeId) :
+                new ObjectParameter("TypeId", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CreateContact", idParameter, nameParameter, phoneParameter, birthdayParameter, typeIdParameter, descriptionParameter);
+        }
+    
+        public virtual int DeleteContactById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteContactById", idParameter);
+        }
+    
+        public virtual int DeleteTypeById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteTypeById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetAllContacts_Result> GetAllContacts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllContacts_Result>("GetAllContacts");
+        }
+    
+        public virtual ObjectResult<GetAllTypes_Result> GetAllTypes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllTypes_Result>("GetAllTypes");
+        }
+    
+        public virtual int GetAllTypesView()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAllTypesView");
+        }
+    
+        public virtual ObjectResult<GetContactById_Result> GetContactById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetContactById_Result>("GetContactById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetTypeById_Result> GetTypeById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTypeById_Result>("GetTypeById", idParameter);
+        }
+    
+        public virtual int UpdateContactInfo(Nullable<int> id, string name, string phone, Nullable<System.DateTime> birthday, Nullable<int> typeId, string description)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var birthdayParameter = birthday.HasValue ?
+                new ObjectParameter("Birthday", birthday) :
+                new ObjectParameter("Birthday", typeof(System.DateTime));
+    
+            var typeIdParameter = typeId.HasValue ?
+                new ObjectParameter("TypeId", typeId) :
+                new ObjectParameter("TypeId", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateContactInfo", idParameter, nameParameter, phoneParameter, birthdayParameter, typeIdParameter, descriptionParameter);
+        }
+    
+        public virtual int UpdateContactType(Nullable<int> id, string name)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateContactType", idParameter, nameParameter);
+        }
     }
 }

@@ -73,3 +73,13 @@ tbody > tr {
     background-color: #efefef;
     padding-bottom: 2em;
 }
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #5c5c5c;
+    border-color: #5c5c5c;
+}
+a {
+    color: #5c5c5c;
+}
+a:hover {
+    color: #5c5c5c;
+}

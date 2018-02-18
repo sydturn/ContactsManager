@@ -15,6 +15,7 @@ namespace MijemApplication.ViewModels
         public string ContactName { get; set; }
 
         [Display(Name = "Phone Number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string PhoneNumber { get; set; }
 
         [Required]

@@ -9,10 +9,16 @@ namespace MijemApplication
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+
+            //make some awesome tables with little to no effort
+            bundles.Add(new ScriptBundle("~/bundles/jquerydataTables").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/dataTables.bootstrap.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -23,9 +29,19 @@ namespace MijemApplication
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            //For rich text editor
+            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+                        "~/Scripts/tinymce/tinymce.min.js"));               
+
+            //STYLES START HERE
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/themes/base/jquery-ui.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/DataTables/css/bundle").Include(
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/DataTables/css/responsive.bootstrap.css"));
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
+﻿/*Custom font for thin text*/
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 /* Set padding to keep content from hitting the edges */
+body {
+    background-color: #efefef;
+}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -21,4 +21,48 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.jumbotron {
+    background-image: url('Images/banner.png');
+    background-size: cover;
+    color: white;
+    margin-bottom: 0px;    
+    font-family: 'Nunito', sans-serif;
+}
+.lead {
+    margin-top: 25px;
+}
+.pageInfo {
+    background-color: #f8f8f8;
+    padding: 20px;
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    margin: 0px;
+}
+.body-content {
+    padding: 15px
+}
+
+/*Ideally I should be using font awesome icons here but in order to keep as close to the requested original as possible we are using png files*/
+.contactNameField {
+    background: url(images/personIcon.png) no-repeat scroll 7px 7px;
+}
+.contactTypeField {
+    background: url(images/locationIcon.png) no-repeat scroll 7px 7px;
+}
+.phoneNumberField {
+    background: url(images/phoneIcon.png) no-repeat scroll 7px 7px;
+}
+.birthdayField {
+    background: url(images/calendarIcon.png) no-repeat scroll 7px 7px;
+}
+.form-control {
+    padding-left: 50px;
+    background-color: white;
+    height: 50px;
+}
+.contactCreation {
+    background-color: #fafafa;
+    padding: 15px;
 }

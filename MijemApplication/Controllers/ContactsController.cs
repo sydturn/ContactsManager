@@ -37,9 +37,8 @@ namespace MijemApplication.Controllers
 
         // POST: Contacts/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType")] ContactsViewModel contact)
+        public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description")] ContactsViewModel contact)
         {
             if (ModelState.IsValid)
             {
@@ -74,24 +73,6 @@ namespace MijemApplication.Controllers
             return View(contact);
         }
 
-        // GET: Contacts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        // POST: Contacts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _contactsService.DeleteContactById(id);

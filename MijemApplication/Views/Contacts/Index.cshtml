@@ -41,7 +41,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("EDIT", "Edit", "Contacts", new { id = item.ContactId }, new { @class = "btn btn-normal" })
-                        @Html.ActionLink("DELETE", "Delete", new { id = item.ContactId }, new { @class = "btn btn-normal" })
+                        <button type="button" class="btn btn-normal" onclick="deleteContact(@item.ContactId)">DELETE</button>
                     </td>
                 </tr>
             }
@@ -51,16 +51,30 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jquerydataTables")
     <script>
+        var table;
         $(document).ready(function () {
-            $('#contactTable').DataTable({
+            table = $('#contactTable').DataTable({
                 "columnDefs": [{
                     "targets": 4,
                     "orderable": false
                 }], 
                 bInfo: false,
-                bLengthChange: false
+                bLengthChange: false,
             });
             $("#createButton").css("display", "inline");
         });
+        //deletes clicked on entry
+        function deleteContact(id) {
+            $.ajax({
+                method: "GET",
+                url: '@Url.Action("DeleteConfirmed")',
+                data: {
+                    id: id
+                },
+                success: function (data, textStatus) {
+                    location.reload();
+                },
+            });
+        }
     </script>
 }

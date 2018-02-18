@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MijemApplication.Models.Contact>
+﻿@model  List<MijemApplication.ViewModels.ContactsViewModel>
 
 @{
     ViewBag.Title = "Reservation List";
@@ -9,16 +9,16 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactName)
+                    Contact Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                    Phone Number
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BirthDate)
+                    Birth Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactType1.TypeName)
+                    Contact Type
                 </th>
                 <th></th>
             </tr>
@@ -37,11 +37,11 @@
                         @Html.DisplayFor(modelItem => item.BirthDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ContactType1.TypeName)
+                        @Html.DisplayFor(modelItem => item.TypeName)
                     </td>
                     <td>
-                        @Html.ActionLink("EDIT", "Edit", new {id = item.ContactID }, new { @class="btn btn-normal"})
-                        @Html.ActionLink("DELETE", "Delete", new { id = item.ContactID }, new { @class = "btn btn-normal" })
+                        <input type="button" title="Delete" value="D" onclick="location.href='@Url.Action("Edit", "Contacts", item)'" />
+                        @Html.ActionLink("DELETE", "Delete", new { id = item.ContactId }, new { @class = "btn btn-normal" })
                     </td>
                 </tr>
             }

@@ -42,7 +42,12 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(function () {
-            $("#datepicker").datepicker();            
+            $("#datepicker").datepicker({
+                lang: 'en',
+                timepicker: false,
+                closeOnDateSelect: true,
+                dateFormat: "yy/mm/dd"
+            });
         });
         $("#viewList").css("display", "inline");
     </script>

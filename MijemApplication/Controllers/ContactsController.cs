@@ -7,33 +7,25 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MijemApplication.Models;
+using MijemApplication.Services.ContactsService;
+using MijemApplication.ViewModels;
 
 namespace MijemApplication.Controllers
 {
     public class ContactsController : Controller
     {
         private MijemTestEntities db = new MijemTestEntities();
+        private readonly IContactsService _contactsService;
 
+        public ContactsController(IContactsService contactsService)
+        {
+            _contactsService = contactsService;
+        }
         // GET: Contacts
         public ActionResult Index()
         {
-            var contacts = db.Contacts.Include(c => c.ContactType1);
-            return View(contacts.ToList());
-        }
-
-        // GET: Contacts/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
+            var contacts = _contactsService.GetAllContacts();
+            return View(contacts);
         }
 
         // GET: Contacts/Create
@@ -62,18 +54,17 @@ namespace MijemApplication.Controllers
         }
 
         // GET: Contacts/Edit/5
-        public ActionResult Edit(int? id)
+        [HttpGet]
+        public ActionResult Edit(ContactsViewModel contact)
         {
-            if (id == null)
+            if (contact == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
             if (contact == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 

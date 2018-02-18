@@ -11,6 +11,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/tinymce")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/site")
 </head>
 <body>
     <div class="jumbotron">
@@ -23,9 +25,12 @@
     </div>
     <div class="pageInfo">
         <div class="container">
-            <h3 class="col-sm-4 col-lg-3" style="color: #bb0000;">Create Reservation</h3>
-            <h4 class="col-sm-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
-        </div>    </div>
+            <h3 class="col-sm-4 col-lg-3" style="color: #bb0000;">@ViewBag.Title</h3>
+            <h4 class="col-sm-5 col-lg-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
+            <span class="col-sm-3">@Html.ActionLink("CREATE RESERVATION", "Create", null, new { @class = "btn btn-normal", style = "display: none", id = "createButton" })</span>
+            <span class="col-sm-3">@Html.ActionLink("VIEW LIST", "Index", null, new { @class = "btn btn-normal", style = "display: none", id = "viewList" })</span>
+        </div>    
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -37,3 +42,6 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<script>
+
+</script>

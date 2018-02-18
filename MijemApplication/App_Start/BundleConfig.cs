@@ -31,7 +31,13 @@ namespace MijemApplication
 
             //For rich text editor
             bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
-                        "~/Scripts/tinymce/tinymce.min.js"));               
+                        "~/Scripts/tinymce/tinymce.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                        "~/Scripts/knockout-{version}.js"));
+            //for site wide javascript             
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+            "~/Scripts/site.js"));
 
             //STYLES START HERE
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -42,6 +48,9 @@ namespace MijemApplication
             bundles.Add(new StyleBundle("~/Content/DataTables/css/bundle").Include(
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/DataTables/css/responsive.bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/createReservation").Include(
+                "~/Content/createReservation.css"));
         }
     }
 }

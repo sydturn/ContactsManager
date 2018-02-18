@@ -33,6 +33,11 @@ textarea {
 .lead {
     margin-top: 25px;
 }
+@media (max-width: 800px) {
+    .lead {
+        display:none;
+    }
+}
 .pageInfo {
     background-color: #f8f8f8;
     padding: 20px;
@@ -43,47 +48,28 @@ textarea {
 .body-content {
     padding: 15px
 }
-
-/*Styling for the contact page and any forms throughout the site (we want them all to be the same)*/
-/*Ideally I should be using font awesome icons here but in order to keep as close to the requested original as possible we are using png files*/
-.contactNameField {
-    background: url(images/personIcon.png) no-repeat scroll 7px 7px;
-}
-.contactTypeField {
-    background: url(images/locationIcon.png) no-repeat scroll 7px 7px;
-}
-.phoneNumberField {
-    background: url(images/phoneIcon.png) no-repeat scroll 7px 7px;
-}
-.birthdayField {
-    background: url(images/calendarIcon.png) no-repeat scroll 7px 7px;
-}
-.form-control {
-    padding-left: 50px;
-    background-color: white;
-    height: 50px;
-    
-    border-radius: 0px;
-}
-
-.contactCreation {
-    background-color: #fafafa;
-    padding: 5px 5px;
-}
-.btn-send {
-    background-color: #bb0000; /* Green */
+.btn-normal {
+    background-color: #9f9f9f;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 20px 2px;
+    margin: 5px 2px;
     cursor: pointer;
     border-radius: 0px;
     float: right;
 }
-.btn-send:hover {
+.btn-normal:hover {
     color: white;
-    background-color: #8e0000;    
+    background-color: #6e6c6c;    
+}
+.tableContainer {
+    background-color: #f8f8f8;
+    padding: 30px;
+}
+tbody > tr {
+    background-color: #efefef;
+    padding-bottom: 2em;
 }

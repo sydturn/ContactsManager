@@ -36,16 +36,14 @@ namespace MijemApplication.Controllers
         }
 
         // POST: Contacts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType")] Contact contact)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType")] ContactsViewModel contact)
         {
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(contact);
-                db.SaveChanges();
+                _contactsService.CreateContact(contact);
                 return RedirectToAction("Index");
             }
 
@@ -55,30 +53,21 @@ namespace MijemApplication.Controllers
 
         // GET: Contacts/Edit/5
         [HttpGet]
-        public ActionResult Edit(ContactsViewModel contact)
+        public ActionResult Edit(int id)
         {
-            if (contact == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
+            var contact = _contactsService.GetContactById(id);
+            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
         // POST: Contacts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType")] Contact contact)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description")] ContactsViewModel contact)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contact).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                _contactsService.UpdateContactInfo(contact);
                 return RedirectToAction("Index");
             }
             ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
@@ -105,9 +94,7 @@ namespace MijemApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact contact = db.Contacts.Find(id);
-            db.Contacts.Remove(contact);
-            db.SaveChanges();
+            _contactsService.DeleteContactById(id);
             return RedirectToAction("Index");
         }
 

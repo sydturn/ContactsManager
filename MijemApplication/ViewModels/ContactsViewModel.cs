@@ -28,7 +28,7 @@ namespace MijemApplication.ViewModels
 
         public int ContactType { get; set; } //type Id
 
-        public IEnumerable<SelectListItem> Types { get; set; }
+        public virtual ContactType ContactType1 { get; set; }
     }
     public class TypeViewModel
     {

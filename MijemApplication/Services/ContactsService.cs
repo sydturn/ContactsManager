@@ -26,6 +26,7 @@ namespace MijemApplication.Services.ContactsService
                 ContactName = o.ContactName,
                 ContactId = o.ContactID,
                 PhoneNumber = o.PhoneNumber,
+                BirthDate = o.BirthDate,
                 ContactType = o.ContactType,
                 Description = o.Description,
                 TypeName = _db.GetTypeById(o.ContactType).Select(x => x.TypeName).First()
@@ -39,7 +40,8 @@ namespace MijemApplication.Services.ContactsService
         /// <param name="vm">takes in contact information in the form of ContactsViewModel</param>
         public void CreateContact(ContactsViewModel vm)
         {
-            _db.CreateContact(vm.ContactId, vm.TypeName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, vm.Description);
+            _db.CreateContact(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, vm.Description);
+            _db.SaveChanges();
         }
 
         /// <summary>
@@ -49,6 +51,7 @@ namespace MijemApplication.Services.ContactsService
         public void DeleteContactById(int id)
         {
             _db.DeleteContactById(id);
+            _db.SaveChanges();
         }
 
         /// <summary>
@@ -70,6 +73,7 @@ namespace MijemApplication.Services.ContactsService
         public void UpdateContactInfo(ContactsViewModel vm)
         {
             _db.UpdateContactInfo(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, vm.Description);
+            _db.SaveChanges();
         }
 
         /// <summary>
@@ -79,6 +83,20 @@ namespace MijemApplication.Services.ContactsService
         public void UpdateContactType(TypeViewModel vm)
         {
             _db.UpdateContactType(vm.TypeID, vm.TypeName);
-        }        
+            _db.SaveChanges();
+        }    
+        
+        public ContactsViewModel GetContactById(int id)
+        {
+            return _db.GetContactById(id).Select(o => new ContactsViewModel
+            {
+                ContactId = o.ContactID,
+                ContactName = o.ContactName,
+                PhoneNumber = o.PhoneNumber,
+                BirthDate = o.BirthDate,
+                ContactType = o.ContactType,
+                Description = o.Description
+            }).First();
+        }
     }
 }

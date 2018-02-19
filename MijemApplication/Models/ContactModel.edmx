@@ -14,7 +14,7 @@
           <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
           <Property Name="BirthDate" Type="date" Nullable="false" />
           <Property Name="ContactType" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="8000" />
+          <Property Name="Description" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ContactTypes">
           <Key>
@@ -92,7 +92,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ContactType" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ContactType1" Relationship="Self.FK_Contacts_ContactTypes" FromRole="Contacts" ToRole="ContactTypes" />
         </EntityType>
         <EntityType Name="ContactType">
@@ -164,7 +164,7 @@
           <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="255" />
           <Property Type="DateTime" Name="BirthDate" Nullable="false" />
           <Property Type="Int32" Name="ContactType" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="8000" />
+          <Property Type="String" Name="Description" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetAllTypes_Result">
           <Property Type="Int32" Name="TypeID" Nullable="false" />
@@ -176,7 +176,7 @@
           <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="255" />
           <Property Type="DateTime" Name="BirthDate" Nullable="false" />
           <Property Type="Int32" Name="ContactType" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="8000" />
+          <Property Type="String" Name="Description" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetTypeById_Result">
           <Property Type="Int32" Name="TypeID" Nullable="false" />

@@ -21,6 +21,7 @@ namespace MijemApplication.ViewModels
         [Required]
         [Display(Name = "Birth Date")]
         [DisplayFormat(DataFormatString = "{0:d}")]
+        [CustomDateValidator(ErrorMessage = "The birthday must be in the past")]
         public DateTime BirthDate { get; set; }
         
         public string Description { get; set; }
@@ -28,6 +29,7 @@ namespace MijemApplication.ViewModels
         public string TypeName { get; set; }
 
         public int ContactType { get; set; } //type Id
+        public string FilePath { get; set; }
 
         public virtual ContactType ContactType1 { get; set; }
     }

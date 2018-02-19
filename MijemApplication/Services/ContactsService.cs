@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.IO;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace MijemApplication.Services.ContactsService
                 PhoneNumber = o.PhoneNumber,
                 BirthDate = o.BirthDate,
                 ContactType = o.ContactType,
-                Description = o.Description,
+                FilePath = o.Description,
                 TypeName = _db.GetTypeById(o.ContactType).Select(x => x.TypeName).First()
             }).ToList();
             return contacts;
@@ -40,7 +41,18 @@ namespace MijemApplication.Services.ContactsService
         /// <param name="vm">takes in contact information in the form of ContactsViewModel</param>
         public void CreateContact(ContactsViewModel vm)
         {
-            _db.CreateContact(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, vm.Description);
+            //create a unique file name/path and store it in the database so we can find it
+            //most of the data entered into the rich text editor is too large to store in a varchar
+            string path = $@"{DateTime.Now.Ticks}.txt";
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.Write(vm.Description.ToString());
+                    sw.Close();
+                }
+            }
+            _db.CreateContact(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, path);
             _db.SaveChanges();
         }
 
@@ -72,7 +84,14 @@ namespace MijemApplication.Services.ContactsService
         /// <param name="vm">vm is the contact being edited</param>
         public void UpdateContactInfo(ContactsViewModel vm)
         {
-            _db.UpdateContactInfo(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, vm.Description);
+            //Remove the old file and make a new one with the description stored in it
+            File.Delete(vm.FilePath);
+            string path = $@"{DateTime.Now.Ticks}.txt";
+            if (!File.Exists(path))
+            {
+                File.WriteAllText(path, vm.Description);
+            }
+            _db.UpdateContactInfo(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, path);
             _db.SaveChanges();
         }
 
@@ -88,15 +107,17 @@ namespace MijemApplication.Services.ContactsService
         
         public ContactsViewModel GetContactById(int id)
         {
-            return _db.GetContactById(id).Select(o => new ContactsViewModel
+            var contact = _db.GetContactById(id).Select(o => new ContactsViewModel
             {
                 ContactId = o.ContactID,
                 ContactName = o.ContactName,
                 PhoneNumber = o.PhoneNumber,
                 BirthDate = o.BirthDate,
                 ContactType = o.ContactType,
-                Description = o.Description
+                FilePath = o.Description
             }).First();
+            contact.Description = File.ReadAllText(contact.FilePath.ToString());
+            return contact;
         }
     }
 }

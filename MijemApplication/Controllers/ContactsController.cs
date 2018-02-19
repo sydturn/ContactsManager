@@ -62,7 +62,7 @@ namespace MijemApplication.Controllers
         // POST: Contacts/Edit/5
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description")] ContactsViewModel contact)
+        public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description,FilePath")] ContactsViewModel contact)
         {
             if (ModelState.IsValid)
             {

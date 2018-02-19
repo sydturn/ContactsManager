@@ -253,6 +253,7 @@
     <Compile Include="Services\IContactsService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
+    <Compile Include="Models\CustomDateValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -770,6 +771,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Descriptions\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>

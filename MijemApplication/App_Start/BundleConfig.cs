@@ -38,12 +38,16 @@ namespace MijemApplication
             //for site wide javascript             
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
             "~/Scripts/site.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
+                "~/Scripts/bootbox.min.js"));
             //STYLES START HERE
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/themes/base/jquery-ui.min.css"));
+            bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
+                      "~/Content/font-awesome.min.css"));
+
 
             bundles.Add(new StyleBundle("~/Content/DataTables/css/bundle").Include(
                       "~/Content/DataTables/css/dataTables.bootstrap.css",

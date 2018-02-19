@@ -39,9 +39,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TypeName)
                     </td>
-                    <td>
+                    <td>                        
+                        <button type="button" class="btn btn-normal" onclick="deleteContact(@item.ContactId, '@item.ContactName')"><span class="fa fa-trash-o"></span></button>
                         @Html.ActionLink("EDIT", "Edit", "Contacts", new { id = item.ContactId }, new { @class = "btn btn-normal" })
-                        <button type="button" class="btn btn-normal" onclick="deleteContact(@item.ContactId)">DELETE</button>
                     </td>
                 </tr>
             }
@@ -52,6 +52,7 @@
     @Scripts.Render("~/bundles/jquerydataTables")
     <script>
         var table;
+        
         $(document).ready(function () {
             table = $('#contactTable').DataTable({
                 "columnDefs": [{
@@ -64,17 +65,34 @@
             $("#createButton").css("display", "inline");
         });
         //deletes clicked on entry
-        function deleteContact(id) {
-            $.ajax({
-                method: "GET",
-                url: '@Url.Action("DeleteConfirmed")',
-                data: {
-                    id: id
+        function deleteContact(id, name) {
+            bootbox.confirm({
+                title: "Delete Contact",
+                message: "Are you sure you want to delete '" + name + "' as a contact? This cannot be undone.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> Confirm'
+                    }
                 },
-                success: function (data, textStatus) {
-                    location.reload();
-                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: '@Url.Action("DeleteConfirmed")',
+                            data: {
+                                id: id
+                            },
+                            success: function (data, textStatus) {
+                                location.reload();
+                            },
+                        });
+                    }
+                }
             });
         }
     </script>
 }
+

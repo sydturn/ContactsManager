@@ -7,11 +7,13 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/DataTables/css/bundle")
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/fontawesome")
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/tinymce")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/site")    
 </head>
 <body>
     <div class="jumbotron">
@@ -38,6 +40,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootbox")
     @RenderSection("scripts", required: false)
 </body>
 </html>

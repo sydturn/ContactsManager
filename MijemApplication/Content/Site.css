@@ -48,7 +48,7 @@ textarea {
 .body-content {
     padding: 15px
 }
-.btn-normal {
+.btn-normal, .btn-primary, .btn-default {
     background-color: #9f9f9f;
     border: none;
     color: white;
@@ -61,7 +61,7 @@ textarea {
     border-radius: 0px;
     float: right;
 }
-.btn-normal:hover {
+.btn-normal:hover, .btn-primary:hover, .btn-primary:focus, .btn-default:hover {
     color: white;
     background-color: #6e6c6c;    
 }

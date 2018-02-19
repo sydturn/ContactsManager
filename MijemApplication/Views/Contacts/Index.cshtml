@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Reservation List";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
 
 <div class="container tableContainer table-responsive">
@@ -9,16 +10,16 @@
         <thead>
             <tr>
                 <th>
-                    Contact Name
+                    @Resources.ContactName
                 </th>
                 <th>
-                    Phone Number
+                    @Resources.PhoneNumber
                 </th>
                 <th>
-                    Birth Date
+                    @Resources.BirthDate
                 </th>
                 <th>
-                    Contact Type
+                    @Resources.ContactType
                 </th>
                 <th></th>
             </tr>

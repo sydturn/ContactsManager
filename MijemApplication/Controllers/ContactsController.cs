@@ -9,14 +9,32 @@ using System.Web.Mvc;
 using MijemApplication.Models;
 using MijemApplication.Services.ContactsService;
 using MijemApplication.ViewModels;
+using MijemApplication.Helpers;
 
 namespace MijemApplication.Controllers
 {
-    public class ContactsController : Controller
+    public class ContactsController : BaseController
     {
         private MijemTestEntities db = new MijemTestEntities();
         private readonly IContactsService _contactsService;
 
+        public ActionResult SetCulture(string culture)
+        {
+            // Validate input
+            culture = CultureHelper.GetImplementedCulture(culture);
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = culture;   // update cookie value
+            else
+            {
+                cookie = new HttpCookie("_culture");
+                cookie.Value = culture;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("Index");
+        }
         public ContactsController(IContactsService contactsService)
         {
             _contactsService = contactsService;

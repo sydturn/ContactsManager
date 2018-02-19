@@ -10,7 +10,7 @@ using MijemApplication.Models;
 
 namespace MijemApplication.Controllers
 {
-    public class ContactTypesController : Controller
+    public class ContactTypesController : BaseController
     {
         private MijemTestEntities db = new MijemTestEntities();
 

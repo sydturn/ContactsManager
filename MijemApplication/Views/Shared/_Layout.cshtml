@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <h1 class="col-sm-4 col-lg-3"><span style="font-weight: bold;">ISU</span>Corp</h1>
-                <p class="col-sm-7 lead">World Class <br /> Software Development</p>
+                <p class="col-sm-7 lead">@Resources.SubHeading1<br /> @Resources.SubHeading2</p>
             </div>
         </div>
     </div>
@@ -28,8 +28,8 @@
         <div class="container">
             <h3 class="col-sm-4 col-lg-3" style="color: #bb0000;">@ViewBag.Title</h3>
             <h4 class="col-sm-5 col-lg-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
-            <span class="col-sm-3">@Html.ActionLink("CREATE RESERVATION", "Create", null, new { @class = "btn btn-normal", style = "display: none", id = "createButton" })</span>
-            <span class="col-sm-3">@Html.ActionLink("VIEW LIST", "Index", null, new { @class = "btn btn-normal", style = "display: none", id = "viewList" })</span>
+            <span class="col-sm-3">@Html.ActionLink(@Resources.CreateReservation, "Create", null, new { @class = "btn btn-normal", style = "display: none", id = "createButton" })</span>
+            <span class="col-sm-3">@Html.ActionLink(@Resources.ViewList, "Index", null, new { @class = "btn btn-normal", style = "display: none", id = "viewList" })</span>
         </div>    
     </div>
     <div class="container body-content">

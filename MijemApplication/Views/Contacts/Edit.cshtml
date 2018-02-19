@@ -15,19 +15,19 @@
         @Html.HiddenFor(model => model.FilePath)
         <div class="form-group contactCreation">
             <div class="col-md-3">
-                @Html.EditorFor(model => model.ContactName, new { htmlAttributes = new { @class = "form-control contactNameField", placeholder = "Contact Name ..." } })
+                @Html.EditorFor(model => model.ContactName, new { htmlAttributes = new { @class = "form-control contactNameField", placeholder = @Resources.ContactName + " ..." } })
                 @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-3">
-                @Html.DropDownList("ContactType", null, htmlAttributes: new { @class = "form-control contactTypeField", placeholder = "Contact Type" })
+                @Html.DropDownList("ContactType", null, htmlAttributes: new { @class = "form-control contactTypeField", placeholder = @Resources.ContactType })
                 @Html.ValidationMessageFor(model => model.ContactType, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-3">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control phoneNumberField", placeholder = "Phone:    -    -" } })
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control phoneNumberField", placeholder = @Resources.Phone + "    -    -" } })
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-3">
-                @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Value = Model.BirthDate.ToString("yyyy/MM/dd"), @class = "form-control birthdayField", id = "datepicker", placeholder = "Birth Date" } })
+                @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Value = Model.BirthDate.ToString("yyyy/MM/dd"), @class = "form-control birthdayField", id = "datepicker", placeholder = @Resources.BirthDate } })
                 @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +36,7 @@
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            <input type="submit" value="SAVE" class="btn btn-send" />
+            <input type="submit" value="@Resources.Send" class="btn btn-send" />
         </div>
     </div>
 }

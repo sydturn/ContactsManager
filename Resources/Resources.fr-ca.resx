@@ -135,13 +135,40 @@
   <data name="ContactType" xml:space="preserve">
     <value>Type de contact</value>
   </data>
+  <data name="CreateReservation" xml:space="preserve">
+    <value>Créer une réservation</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>La description</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="EditReservation" xml:space="preserve">
+    <value>modifier la réservation</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Téléphone</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Numéro de téléphone</value>
   </data>
   <data name="PhoneNumberInvalid" xml:space="preserve">
     <value>Vous avez entré un numéro de téléphone invalide!</value>
+  </data>
+  <data name="ReservationList" xml:space="preserve">
+    <value>Liste de réservation</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="SubHeading1" xml:space="preserve">
+    <value> De classe mondiale</value>
+  </data>
+  <data name="SubHeading2" xml:space="preserve">
+    <value>Développement de logiciels</value>
+  </data>
+  <data name="ViewList" xml:space="preserve">
+    <value>Voir la liste</value>
   </data>
 </root>

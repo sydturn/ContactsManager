@@ -115,11 +115,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Reservation.
+        /// </summary>
+        public static string CreateReservation {
+            get {
+                return ResourceManager.GetString("CreateReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Reservation.
+        /// </summary>
+        public static string EditReservation {
+            get {
+                return ResourceManager.GetString("EditReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
             }
         }
         
@@ -138,6 +174,51 @@ namespace Resources {
         public static string PhoneNumberInvalid {
             get {
                 return ResourceManager.GetString("PhoneNumberInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation List.
+        /// </summary>
+        public static string ReservationList {
+            get {
+                return ResourceManager.GetString("ReservationList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to World Class.
+        /// </summary>
+        public static string SubHeading1 {
+            get {
+                return ResourceManager.GetString("SubHeading1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software Development.
+        /// </summary>
+        public static string SubHeading2 {
+            get {
+                return ResourceManager.GetString("SubHeading2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View List.
+        /// </summary>
+        public static string ViewList {
+            get {
+                return ResourceManager.GetString("ViewList", resourceCulture);
             }
         }
     }

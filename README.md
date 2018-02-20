@@ -1,7 +1,7 @@
 # ContactsManager
 
 **Application Description:**<br/>
-This is a simple CRUD Application that allows users to add, edit, delete and list-view contacts.
+This is a simple CRUD Application that allows users to add, edit, delete and list/view contacts.
 
 **Warning:**</br>
 Please note that the rich text editor on the edit page loads slowly in <b>CHROME</b> if the content size is too large (if you've added pictures or videos).
@@ -15,7 +15,7 @@ This project contains reference to various libraries, languages and web developm
 - Bootbox
 - TinyMCE
 - Ajax
-- Datatables
+- DataTables
 - Font Awesome
 - C#.NET MVC
 - Razor

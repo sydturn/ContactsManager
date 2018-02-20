@@ -41,3 +41,5 @@ This application can be viewed in Canadian-French or English. To view the applic
 ![Demo Language/Region Handling](https://github.com/sydturn/ContactsManager/blob/master/Demo/Language.gif)
 <i>Demo List Pagenation</i></br>
 ![Demo Pagenation](https://github.com/sydturn/ContactsManager/blob/master/Demo/Pagenation.gif)
+<i>Mobile View of Application</i></br>
+![Mobile View](https://github.com/sydturn/ContactsManager/blob/master/Demo/mobileView.PNG)

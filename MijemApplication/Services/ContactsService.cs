@@ -1,20 +1,14 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.IO;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MijemApplication.Models;
 using MijemApplication.ViewModels;
 
-namespace MijemApplication.Services.ContactsService
+namespace MijemApplication.Services
 {
     public class ContactsService : IContactsService
     {
-        private MijemTestEntities _db = new MijemTestEntities();
+        private readonly MijemTestEntities _db = new MijemTestEntities();
 
         /// <summary>
         /// gets all contacts from the contact table
@@ -48,7 +42,7 @@ namespace MijemApplication.Services.ContactsService
             {
                 using (StreamWriter sw = File.CreateText(path))
                 {
-                    sw.Write(vm.Description.ToString());
+                    sw.Write(vm.Description);
                     sw.Close();
                 }
             }
@@ -67,18 +61,6 @@ namespace MijemApplication.Services.ContactsService
         }
 
         /// <summary>
-        /// gets all types from the contactTypes table
-        /// </summary>
-        /// <returns>returns a list of types</returns>
-        public List<TypeViewModel> GetAllTypes()
-        {
-            return _db.GetAllTypes().Select(o => new TypeViewModel
-            {
-                TypeID = o.TypeID,
-                TypeName = o.TypeName,
-            }).ToList();
-        }
-        /// <summary>
         /// updates a pre-existing entry in the contacts table
         /// </summary>
         /// <param name="vm">vm is the contact being edited</param>
@@ -94,17 +76,12 @@ namespace MijemApplication.Services.ContactsService
             _db.UpdateContactInfo(vm.ContactId, vm.ContactName, vm.PhoneNumber, vm.BirthDate, vm.ContactType, path);
             _db.SaveChanges();
         }
-
-        /// <summary>
-        /// takes in a type and updates the corresponding entry in the contact types table
-        /// </summary>
-        /// <param name="vm">takes in typeviewmodel</param>
-        public void UpdateContactType(TypeViewModel vm)
-        {
-            _db.UpdateContactType(vm.TypeID, vm.TypeName);
-            _db.SaveChanges();
-        }    
         
+        /// <summary>
+        /// Get's contact from the contac table based on an id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>returns a contact in the form of a contact viewmodel</returns>
         public ContactsViewModel GetContactById(int id)
         {
             var contact = _db.GetContactById(id).Select(o => new ContactsViewModel
@@ -116,7 +93,7 @@ namespace MijemApplication.Services.ContactsService
                 ContactType = o.ContactType,
                 FilePath = o.Description
             }).First();
-            contact.Description = File.ReadAllText(contact.FilePath.ToString());
+            contact.Description = File.ReadAllText(contact.FilePath);
             return contact;
         }
     }

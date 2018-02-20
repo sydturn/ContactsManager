@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MijemApplication.ViewModels;
 
-namespace MijemApplication.Services.ContactsService
+namespace MijemApplication.Services
 {
     public interface IContactsService
     {

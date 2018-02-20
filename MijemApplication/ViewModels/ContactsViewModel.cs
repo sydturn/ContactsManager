@@ -1,8 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System;
-using MijemApplication.Models;
-using System.Web.Mvc;
-using System.Collections.Generic;
 
 namespace MijemApplication.ViewModels
 {
@@ -38,10 +35,5 @@ namespace MijemApplication.ViewModels
         public string FilePath { get; set; }
 
         public virtual ContactType ContactType1 { get; set; }
-    }
-    public class TypeViewModel
-    {
-        public int TypeID { get; set; }
-        public string TypeName { get; set; }
     }
 }

@@ -11,7 +11,7 @@
     menubar: false,
     file_picker_types: 'image',
     // and here's our custom image picker
-    file_picker_callback: function (cb, value, meta) {
+    file_picker_callback: function (cb) {
         var input = document.createElement('input');
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');

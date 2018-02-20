@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MijemApplication.Models
+namespace MijemApplication.ViewModels
 {
     using System;
     using System.Data.Entity;

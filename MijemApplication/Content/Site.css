@@ -27,7 +27,7 @@ textarea {
     background-image: url('Images/banner.png');
     background-size: cover;
     color: white;
-    margin-bottom: 0px;    
+    margin-bottom: 0;    
     font-family: 'Nunito', sans-serif;
 }
 .lead {
@@ -37,13 +37,18 @@ textarea {
     .lead {
         display:none;
     }
+    input,
+    select,
+    textarea {
+        max-width: none;
+    }
 }
 .pageInfo {
     background-color: #f8f8f8;
     padding: 20px;
     font-family: 'Nunito', sans-serif;
     width: 100%;
-    margin: 0px;
+    margin: 0;
 }
 .body-content {
     padding: 15px
@@ -58,7 +63,7 @@ textarea {
     display: inline-block;
     margin: 5px 2px;
     cursor: pointer;
-    border-radius: 0px;
+    border-radius: 0;
     float: right;
 }
 .btn-normal:hover, .btn-primary:hover, .btn-primary:focus, .btn-default:hover {

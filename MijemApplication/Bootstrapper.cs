@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc3;
 using MijemApplication.Controllers;
-using MijemApplication.Services.ContactsService;
+using MijemApplication.Services;
 
 namespace MijemApplication
 {

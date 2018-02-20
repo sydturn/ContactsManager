@@ -17,7 +17,7 @@
     background-color: white;
     height: 50px;
     
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .contactCreation {
@@ -34,7 +34,7 @@
     display: inline-block;
     margin: 20px 2px;
     cursor: pointer;
-    border-radius: 0px;
+    border-radius: 0;
     float: right;
 }
 .btn-send:hover {
@@ -42,8 +42,8 @@
     background-color: #8e0000;    
 }
 .col-md-3 {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 textarea {
@@ -51,6 +51,6 @@ textarea {
 }
 
 .form-horizontal .form-group {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
 }

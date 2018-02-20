@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MijemApplication.Models;
-using MijemApplication.Services.ContactsService;
+﻿using System.Web.Mvc;
 using MijemApplication.ViewModels;
+using MijemApplication.Services;
 
 namespace MijemApplication.Controllers
 {
     public class ContactsController : Controller
     {
-        private MijemTestEntities db = new MijemTestEntities();
+        private readonly MijemTestEntities _db = new MijemTestEntities();
         private readonly IContactsService _contactsService;
 
         public ContactsController(IContactsService contactsService)
@@ -31,7 +23,7 @@ namespace MijemApplication.Controllers
         // GET: Contacts/Create
         public ActionResult Create()
         {
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName");
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName");
             return View();
         }
 
@@ -46,7 +38,7 @@ namespace MijemApplication.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
@@ -55,7 +47,7 @@ namespace MijemApplication.Controllers
         public ActionResult Edit(int id)
         {
             var contact = _contactsService.GetContactById(id);
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
@@ -69,7 +61,7 @@ namespace MijemApplication.Controllers
                 _contactsService.UpdateContactInfo(contact);
                 return RedirectToAction("Index");
             }
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
@@ -83,7 +75,7 @@ namespace MijemApplication.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

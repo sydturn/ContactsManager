@@ -44,6 +44,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+        //initalizing jquery datepicker for birthday entry
         $(function () {
             $("#datepicker").datepicker({
                 lang: 'en',
@@ -52,6 +53,7 @@
                 dateFormat: "yy/mm/dd"
             });
         });
+        //shows the "view list" button which is hidden by default
         $("#viewList").css("display", "inline");
     </script>
 }

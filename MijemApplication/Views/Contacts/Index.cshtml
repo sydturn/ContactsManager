@@ -53,6 +53,7 @@
     <script>
         var table;
         
+        //create table that contacts are listed in with 4 columns, hiding page info and page selection dropdown (using datatables library)
         $(document).ready(function () {
             table = $('#contactTable').DataTable({
                 "columnDefs": [{
@@ -65,7 +66,7 @@
             });
             $("#createButton").css("display", "inline");
         });
-        //deletes clicked on entry
+        //triggers a confirmation box to delete the contact that was clicked on and calls delete on confirm
         function deleteContact(id, name) {
             bootbox.confirm({
                 title: "Delete Contact",

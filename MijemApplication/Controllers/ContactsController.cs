@@ -13,21 +13,21 @@ namespace MijemApplication.Controllers
         {
             _contactsService = contactsService;
         }
-        // GET: Contacts
+        // Return primary contacts page (list of contacts)
         public ActionResult Index()
         {
             var contacts = _contactsService.GetAllContacts();
             return View(contacts);
         }
 
-        // GET: Contacts/Create
+        // Brings user to the create page
         public ActionResult Create()
         {
             ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName");
             return View();
         }
 
-        // POST: Contacts/Create
+        // Creates a contact in the contact table and returns user to contact list page
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description")] ContactsViewModel contact)
@@ -42,7 +42,7 @@ namespace MijemApplication.Controllers
             return View(contact);
         }
 
-        // GET: Contacts/Edit/5
+        // Brings user to the edit page for specified contact
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -51,7 +51,7 @@ namespace MijemApplication.Controllers
             return View(contact);
         }
 
-        // POST: Contacts/Edit/5
+        // Saves edites to contact entry in contacts table and returns user to contact list page
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description,FilePath")] ContactsViewModel contact)
@@ -65,6 +65,7 @@ namespace MijemApplication.Controllers
             return View(contact);
         }
 
+        //deletes a user from the contact table based on the specified user id
         public ActionResult DeleteConfirmed(int id)
         {
             _contactsService.DeleteContactById(id);

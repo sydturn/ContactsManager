@@ -1,24 +1,24 @@
-﻿@model IEnumerable<MijemApplication.Models.Contact>
+﻿@model  List<MijemApplication.ViewModels.ContactsViewModel>
 
 @{
-    ViewBag.Title = "Reservation List";
+    ViewBag.Title = Resources.ReservationList;
 }
 
-<div class="container tableContainer">
+<div class="container tableContainer table-responsive">
     <table class="table" id="contactTable">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactName)
+                    @Resources.ContactName
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                    @Resources.PhoneNumber
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BirthDate)
+                    @Resources.BirthDate
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactType1.TypeName)
+                    @Resources.ContactType
                 </th>
                 <th></th>
             </tr>
@@ -37,11 +37,11 @@
                         @Html.DisplayFor(modelItem => item.BirthDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ContactType1.TypeName)
+                        @Html.DisplayFor(modelItem => item.TypeName)
                     </td>
-                    <td>
-                        @Html.ActionLink("EDIT", "Edit", new {id = item.ContactID }, new { @class="btn btn-normal"})
-                        @Html.ActionLink("DELETE", "Delete", new { id = item.ContactID }, new { @class = "btn btn-normal" })
+                    <td>                        
+                        <button type="button" class="btn btn-normal" onclick="deleteContact(@item.ContactId, '@item.ContactName')"><span class="fa fa-trash-o"></span></button>
+                        @Html.ActionLink(Resources.Edit, "Edit", "Contacts", new { id = item.ContactId }, new { @class = "btn btn-normal" })
                     </td>
                 </tr>
             }
@@ -51,16 +51,49 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jquerydataTables")
     <script>
+        var table;
+        
+        //create table that contacts are listed in with 4 columns, hiding page info and page selection dropdown (using datatables library)
         $(document).ready(function () {
-            $('#contactTable').DataTable({
+            table = $('#contactTable').DataTable({
                 "columnDefs": [{
                     "targets": 4,
                     "orderable": false
                 }], 
                 bInfo: false,
-                bLengthChange: false
+                bLengthChange: false,
+                language: navigator.language
             });
             $("#createButton").css("display", "inline");
         });
+        //triggers a confirmation box to delete the contact that was clicked on and calls delete on confirm
+        function deleteContact(id, name) {
+            bootbox.confirm({
+                title: "Delete Contact",
+                message: "Are you sure you want to delete '" + name + "' as a contact? This cannot be undone.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> Confirm'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: '@Url.Action("DeleteConfirmed")',
+                            data: {
+                                id: id
+                            },
+                            success: function () {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        }
     </script>
 }

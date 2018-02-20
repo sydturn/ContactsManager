@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MijemApplication.Models
+namespace MijemApplication.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace MijemApplication.Models
         public string PhoneNumber { get; set; }
         public System.DateTime BirthDate { get; set; }
         public int ContactType { get; set; }
+        public string Description { get; set; }
     
         public virtual ContactType ContactType1 { get; set; }
     }

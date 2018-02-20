@@ -1,122 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MijemApplication.Models;
+﻿using System.Web.Mvc;
+using MijemApplication.ViewModels;
+using MijemApplication.Services;
 
 namespace MijemApplication.Controllers
 {
     public class ContactsController : Controller
     {
-        private MijemTestEntities db = new MijemTestEntities();
+        private readonly MijemTestEntities _db = new MijemTestEntities();
+        private readonly IContactsService _contactsService;
 
-        // GET: Contacts
+        public ContactsController(IContactsService contactsService)
+        {
+            _contactsService = contactsService;
+        }
+        // Return primary contacts page (list of contacts)
         public ActionResult Index()
         {
-            var contacts = db.Contacts.Include(c => c.ContactType1);
-            return View(contacts.ToList());
+            var contacts = _contactsService.GetAllContacts();
+            return View(contacts);
         }
 
-        // GET: Contacts/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        // GET: Contacts/Create
+        // Brings user to the create page
         public ActionResult Create()
         {
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName");
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName");
             return View();
         }
 
-        // POST: Contacts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Creates a contact in the contact table and returns user to contact list page
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType")] Contact contact)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description")] ContactsViewModel contact)
         {
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(contact);
-                db.SaveChanges();
+                _contactsService.CreateContact(contact);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
-        // GET: Contacts/Edit/5
-        public ActionResult Edit(int? id)
+        // Brings user to the edit page for specified contact
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
+            var contact = _contactsService.GetContactById(id);
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
-        // POST: Contacts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Saves edites to contact entry in contacts table and returns user to contact list page
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType")] Contact contact)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "ContactID,ContactName,PhoneNumber,BirthDate,ContactType,Description,FilePath")] ContactsViewModel contact)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contact).State = EntityState.Modified;
-                db.SaveChanges();
+                _contactsService.UpdateContactInfo(contact);
                 return RedirectToAction("Index");
             }
-            ViewBag.ContactType = new SelectList(db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
+            ViewBag.ContactType = new SelectList(_db.ContactTypes, "TypeID", "TypeName", contact.ContactType);
             return View(contact);
         }
 
-        // GET: Contacts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        // POST: Contacts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //deletes a user from the contact table based on the specified user id
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact contact = db.Contacts.Find(id);
-            db.Contacts.Remove(contact);
-            db.SaveChanges();
+            _contactsService.DeleteContactById(id);
             return RedirectToAction("Index");
         }
 
@@ -124,7 +76,7 @@ namespace MijemApplication.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

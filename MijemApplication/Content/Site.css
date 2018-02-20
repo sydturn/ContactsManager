@@ -27,7 +27,7 @@ textarea {
     background-image: url('Images/banner.png');
     background-size: cover;
     color: white;
-    margin-bottom: 0px;    
+    margin-bottom: 0;    
     font-family: 'Nunito', sans-serif;
 }
 .lead {
@@ -37,18 +37,23 @@ textarea {
     .lead {
         display:none;
     }
+    input,
+    select,
+    textarea {
+        max-width: none;
+    }
 }
 .pageInfo {
     background-color: #f8f8f8;
     padding: 20px;
     font-family: 'Nunito', sans-serif;
     width: 100%;
-    margin: 0px;
+    margin: 0;
 }
 .body-content {
     padding: 15px
 }
-.btn-normal {
+.btn-normal, .btn-primary, .btn-default {
     background-color: #9f9f9f;
     border: none;
     color: white;
@@ -58,10 +63,10 @@ textarea {
     display: inline-block;
     margin: 5px 2px;
     cursor: pointer;
-    border-radius: 0px;
+    border-radius: 0;
     float: right;
 }
-.btn-normal:hover {
+.btn-normal:hover, .btn-primary:hover, .btn-primary:focus, .btn-default:hover {
     color: white;
     background-color: #6e6c6c;    
 }
@@ -72,4 +77,14 @@ textarea {
 tbody > tr {
     background-color: #efefef;
     padding-bottom: 2em;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #5c5c5c;
+    border-color: #5c5c5c;
+}
+a {
+    color: #5c5c5c;
+}
+a:hover {
+    color: #5c5c5c;
 }

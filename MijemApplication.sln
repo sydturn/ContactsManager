@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MijemApplication", "MijemApplication\MijemApplication.csproj", "{BB33E87A-53D3-4217-A11A-5E80577DA0CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{DDD9D50B-C6EC-4FE1-88DD-AC1DACFBE2EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{BB33E87A-53D3-4217-A11A-5E80577DA0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB33E87A-53D3-4217-A11A-5E80577DA0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB33E87A-53D3-4217-A11A-5E80577DA0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD9D50B-C6EC-4FE1-88DD-AC1DACFBE2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD9D50B-C6EC-4FE1-88DD-AC1DACFBE2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD9D50B-C6EC-4FE1-88DD-AC1DACFBE2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD9D50B-C6EC-4FE1-88DD-AC1DACFBE2EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

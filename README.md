@@ -29,3 +29,15 @@ To run this application you will need to create a database using the scripts loc
 
 **Internationalization Testing:**<br/>
 This application can be viewed in Canadian-French or English. To view the application in french go to your browser settings and change the browser language preferance to french. In Chrome you will also have to move the language to the top of the language list.
+
+**Demonstration**<br/>
+<i>Demo Add Contact and Rich Text Editor Field</i></br>
+![Demo Add and Rich Text Editor](https://github.com/sydturn/ContactsManager/blob/master/Demo/AddingAndRichText.gif)
+<i>Demo Edit Contact and Delete</i></br>
+![Demo Edit and Delete](https://github.com/sydturn/ContactsManager/blob/master/Demo/DeleteAndValidate.gif)
+<i>Demo Edit, Sort, and Search Contacts</i></br>
+![Demo Edit, Sort, and Search](https://github.com/sydturn/ContactsManager/blob/master/Demo/EditSortSearch.gif)
+<i>Demo Application Language/Region Handling</i></br>
+![Demo Language/Region Handling](https://github.com/sydturn/ContactsManager/blob/master/Demo/Language.gif)
+<i>Demo List Pagenation</i></br>
+![Demo Pagenation](https://github.com/sydturn/ContactsManager/blob/master/Demo/Pagenation.gif)

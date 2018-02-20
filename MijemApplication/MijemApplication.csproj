@@ -748,7 +748,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Contacts\Create.cshtml" />
     <Content Include="Views\Contacts\Delete.cshtml" />
-    <Content Include="Views\Contacts\Details.cshtml" />
     <Content Include="Views\Contacts\Edit.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
@@ -764,8 +763,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Descriptions\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Error\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
